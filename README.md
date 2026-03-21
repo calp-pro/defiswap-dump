@@ -3,7 +3,7 @@
 <br>
 
 Static set of addresses (Crypto.com DeFi Swap Ethereum mainnet).<br>
-New pairs updates happen every hour at GitHub Action [update.yml](https://github.com/calp-pro/uniswap-v2-dump/actions/workflows/update.yml)<br>
+New pairs updates happen every hour at GitHub Action [update.yml](https://github.com/calp-pro/defiswap-dump/actions/workflows/update.yml)<br>
 via [uniswap-v2-loader](https://github.com/calp-pro/uniswap-v2-loader)
 
 Data:
