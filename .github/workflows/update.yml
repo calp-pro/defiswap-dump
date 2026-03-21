@@ -1,4 +1,4 @@
-name: Update dump.csv
+name: Update dump binary files and publish to NPM
 
 on:
   push:
@@ -22,14 +22,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        lfs: true
+      uses: actions/checkout@v6
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: '22'
+        node-version: '24'
         registry-url: 'https://registry.npmjs.org'
 
     - name: Update npm
@@ -46,10 +44,12 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add dump.csv
+        git add dump_pairs.bin dump_tokens.bin dump_p2tt.bin
         if ! git diff --cached --quiet; then
-          npm version patch --force -m "chore: update dump.csv to %s [skip ci]"
+          npm version patch --force -m "chore: update dump_*.bin to %s [skip ci]"
           git push --follow-tags
+          echo "can_publish=true" >> $GITHUB_OUTPUT
+        elif [ "${{ github.event_name }}" != "schedule" ]; then
           echo "can_publish=true" >> $GITHUB_OUTPUT
         else
           echo "No changes"
