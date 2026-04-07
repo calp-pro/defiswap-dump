@@ -30,14 +30,14 @@ jobs:
         node-version: '24'
         registry-url: 'https://registry.npmjs.org'
 
-    - name: Update npm
-      run: npm install -g npm@latest
-
     - name: Install dependencies
       run: npm install
 
-    - name: Run update
+    - name: Update
       run: npm start
+
+    - name: Test
+      run: npm test
 
     - name: Commit and push changes
       id: commit
